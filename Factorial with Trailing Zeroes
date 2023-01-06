@@ -1,0 +1,19 @@
+// The concept behind this question is bassically find the number of zeros in a factorial of a
+given number
+// Approch is that if number is divisible by both 2 and 5 that means it has atleast one zero
+// By using this mathed we divided the number every time power of 5 and return the total some. 
+
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int i=1;
+        int count =0;
+        while(n>0){
+            if (n/(pow(5 , i)) <= 0)
+                break;
+            count += (n/(pow(5 , i)));
+            i++;
+        }
+        return count;
+    }
+};
