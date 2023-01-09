@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+#include <bits/stdc++.h>
+
+int gcd(int a, int b)
+{
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+int minOperations(vector<int> &nums, vector<int> &numsDivide)
+{
+    int n1 = nums.size();
+    int n2 = numsDivide.size();
+    int minimum1 = *min_element(nums.begin(), nums.end());
+    int minimum2 = *min_element(numsDivide.begin(), numsDivide.end());
+    if (minimum1 > minimum2)
+        return -1;
+    int gcd_of_numsdivide = numsDivide[0];
+    for (int i = 1; i < n2; i++)
+    {
+        gcd_of_numsdivide = gcd(gcd_of_numsdivide, numsDivide[i]);
+    }
+    sort(nums.begin(), nums.end());
+    for (int i = 0; i < n1; i++)
+    {
+        if (gcd_of_numsdivide % nums[i] == 0)
+            return i;
+    }
+
+    return -1;
+}
+
+int main()
+{
+    vector<int> numsDivide = {105, 70, 70, 175, 105, 105, 105};
+    vector<int> nums = {3, 2, 6, 2, 35, 5, 35, 2, 5, 8, 7, 3, 4};
+    int x = minOperations(nums, numsDivide);
+    cout<<x<<endl;
+    return 0;
+}
